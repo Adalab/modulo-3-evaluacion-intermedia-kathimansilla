@@ -80,9 +80,9 @@ function App() {
       <ul>{renderDataList(dataList)}</ul>
       <form onSubmit={handelOnSubmit}>
         <label htmlFor="addQuote">Frase </label>
-        <input name='addQuote' id='addQuote' onInput={handleInputAddQuote} type="text" value={newQuote.quote} />
+        <input name='addQuote' id='quote' onInput={handleInputAddQuote} type="text" value={newQuote.quote} />
         <label htmlFor="addCharacter">Personaje </label>
-        <input type="text" name="addCharacter" id="addCharacter" onInput={handleInputAddQuote} value={newQuote.character} />
+        <input type="text" name="addCharacter" id="character" onInput={handleInputAddQuote} value={newQuote.character} />
         <input type="submit" value='Añadir la nueva frase' onClick={handleAddNewQuote} />
       </form>
     </div>
