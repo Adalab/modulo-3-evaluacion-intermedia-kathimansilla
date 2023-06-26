@@ -7,9 +7,14 @@ function App() {
   const [dataList, setDataList] = useState([]);
   const [searchQuote, setSearchQuote] = useState('');
   const [selectCharacter, setSelectCharacter] = useState('');
+  const [newQuote, setNewQuote] = useState(
+    {
+      quote: '',
+      character: ''
+    }
+  );
 
   /*funciones*/
-
   useEffect(() => {
     callToApi()
     .then((data) => {
@@ -37,6 +42,24 @@ function App() {
   const handelOnSubmit = (ev) => {
     ev.preventDefault();
   }
+
+  const handleInputAddQuote = (ev) => {
+    setNewQuote(
+      {
+        ...newQuote,
+        [ev.target.id]: ev.target.value
+      }
+    );
+  };
+
+  const handleAddNewQuote = (ev) => {
+    setDataList([...dataList, newQuote]);
+    setNewQuote({
+      quote: '',
+      character: ''
+    });
+  };
+
   return (
     <div className='main'>
       <h1 className='main__title'>Frases de Friends</h1>
@@ -55,6 +78,13 @@ function App() {
         </select>
       </form>
       <ul>{renderDataList(dataList)}</ul>
+      <form onSubmit={handelOnSubmit}>
+        <label htmlFor="addQuote">Frase </label>
+        <input name='addQuote' id='addQuote' onInput={handleInputAddQuote} type="text" value={newQuote.quote} />
+        <label htmlFor="addCharacter">Personaje </label>
+        <input type="text" name="addCharacter" id="addCharacter" onInput={handleInputAddQuote} value={newQuote.character} />
+        <input type="submit" value='Añadir la nueva frase' onClick={handleAddNewQuote} />
+      </form>
     </div>
   );
 }
